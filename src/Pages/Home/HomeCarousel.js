@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+
 import Carousel from 'react-bootstrap/Carousel';
+
 import firstImg from '../../Asset/firstImg.jpg';
 import secondImg from '../../Asset/secondImg.jpg';
 import thirdImg from '../../Asset/thirdImg.jpg';
@@ -34,9 +35,7 @@ export const HomeCarousel = () => {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-            <Container>
-                <h1>Hello</h1>
-            </Container>
+
         </div>
     );
 };

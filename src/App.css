@@ -22,10 +22,6 @@
     filter: brightness(40%);
 }
 
-.caption-bg {
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
 .caption-text {
     display: block;
     max-width: 70%; /* Adjust the width value as per your design */
