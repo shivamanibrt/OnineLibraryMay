@@ -1,7 +1,11 @@
 import React from 'react'
+import { HomeCarousel } from './HomeCarousel'
 
 export const Home = () => {
     return (
-        <div>Home</div>
+        <div>
+            <HomeCarousel />
+
+        </div>
     )
 }

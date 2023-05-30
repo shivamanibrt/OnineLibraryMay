@@ -1,3 +1,62 @@
 .main {
     min-height: 80vh;
 }
+
+.user-layout {
+    display: flex;
+    width: 100%;
+}
+
+.carousel {
+    min-height: 60vh;
+}
+
+.carousel-image {
+    /* Adjust the height value to your desired fixed height */
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.carousel-image.dark-overlay {
+    filter: brightness(40%);
+}
+
+.caption-bg {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.caption-text {
+    display: block;
+    max-width: 70%; /* Adjust the width value as per your design */
+    margin: 0 auto;
+}
+
+.left {
+    width: 30%;
+    height: 90vh;
+}
+
+.right {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar li {
+    list-style: none;
+    line-height: 3rem;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.nav-links li a:hover {
+    color: #666666;
+}

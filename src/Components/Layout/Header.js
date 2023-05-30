@@ -30,10 +30,10 @@ export const Header = () => {
     };
 
     return (
-        <Navbar collapseOnSelect expand="lg" style={{ fontSize: '30px' }}>
+        <Navbar collapseOnSelect expand="lg" style={{ fontSize: '30px' }} className=''>
             <Container>
-                <Navbar.Brand as={Link} to="/" style={{ fontSize: '30px' }}>
-                    <IoIosBook />
+                <Navbar.Brand as={Link} to="/" style={{ fontSize: '30px' }} >
+                    <IoIosBook className='icon-light' />
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
@@ -42,19 +42,19 @@ export const Header = () => {
                         {user?.uid ? (
                             <>
                                 <Nav.Link as={Link} to="/dashboard">
-                                    <AiOutlineDashboard />{' '}
+                                    <AiOutlineDashboard className='icon-light' />{' '}
                                 </Nav.Link>
                                 <Nav.Link as={Link} to="/" onClick={handleLogout}>
-                                    <FiLogOut />{' '}
+                                    <FiLogOut className='icon-light' />{' '}
                                 </Nav.Link>
                             </>
                         ) : (
                             <>
-                                <Nav.Link as={Link} to="/signIn">
-                                    <GoSignIn />{' '}
+                                <Nav.Link as={Link} to="/signIn" >
+                                    <GoSignIn className='icon-light' />{' '}
                                 </Nav.Link>
                                 <Nav.Link as={Link} to="/signUp">
-                                    <IoIosCreate />
+                                    <IoIosCreate className='icon-light' />
                                 </Nav.Link>
                             </>
                         )}

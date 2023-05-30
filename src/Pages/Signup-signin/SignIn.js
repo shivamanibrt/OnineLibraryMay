@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
-import { CustomInput } from '../../Components/MainLayout/CustomInput/CustomInput'
+import { CustomInput } from '../../Components/CustomInput/CustomInput'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from './userAction';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +14,7 @@ export const SignIn = () => {
     const { user } = useSelector((state) => state.user);
 
     useEffect(() => {
-        user?.uid && navigate('/dashboard')
+        user?.uid && navigate('/')
     })
 
 
