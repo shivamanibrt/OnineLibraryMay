@@ -16,6 +16,7 @@ import { Clients } from './Pages/Clients/Clients';
 import { History } from './Pages/History/History';
 import { User } from './Pages/User/User';
 import { Profile } from './Pages/Profile/Profile';
+import { NewBooks } from './Pages/Book/NewBooks';
 
 
 function App() {
@@ -36,11 +37,13 @@ function App() {
           <Route path='signUp' element={<SignUp />} />
 
           <Route path='dashboard' element={<Dashboard />} />
+          <Route path='profile' element={<Profile />} />
           <Route path='books' element={<Books />} />
+          <Route path='newBooks' element={<NewBooks />} />
           <Route path='clients' element={<Clients />} />
           <Route path='history' element={<History />} />
           <Route path='user' element={<User />} />
-          <Route path='profile' element={<Profile />} />
+
 
         </Routes>
         <ToastContainer />

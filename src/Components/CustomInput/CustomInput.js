@@ -5,8 +5,8 @@ import { Form } from 'react-bootstrap'
 export const CustomInput = ({ label, ...rest }) => {
     return (
         <Form.Group className="mb-3">
-            <Form.Label>{label}</Form.Label>
-            <Form.Control {...rest} />
+            {label && <Form.Label>{label}</Form.Label>}
+            <Form.Control {...rest} style={{ maxWidth: '100%' }} />
         </Form.Group>
     )
 }

@@ -12,7 +12,6 @@ export const Profile = () => {
                     </h3>
                     <hr />
                 </div>
-
             </UserLayout>
         </>
     );
