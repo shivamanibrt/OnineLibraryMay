@@ -19,6 +19,9 @@ export const UserLayout = ({ children }) => {
                                 <>
                                     {/* for admin only */}
                                     <li>
+                                        <Link to='/dashboard'>Dashboard</Link>
+                                    </li>
+                                    <li>
                                         <Link to='/books'>Books</Link>
                                     </li>
                                     <li>
@@ -37,6 +40,9 @@ export const UserLayout = ({ children }) => {
                             ) : (
                                 // for all user types
                                 <>
+                                    <li>
+                                        <Link to='/dashboard'>Dashboard</Link>
+                                    </li>
                                     <li>
                                         <Link to='/history'>History</Link>
                                     </li>

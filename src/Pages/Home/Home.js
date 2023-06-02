@@ -22,10 +22,10 @@ export const Home = () => {
                     <hr />
                 </Row>
                 <Row>
-                    {book.map((item) => (
+                    {book.map((item, i) => (
                         <Col className="d-flex gap-2 flex-wrap justify-content-around">
-                            <div className="d-flex justify-content-center">
-                                <BookCard {...item} />
+                            <div className="d-flex justify-content-center" >
+                                <BookCard {...item} key={i} />
                             </div>
                         </Col>
                     ))}

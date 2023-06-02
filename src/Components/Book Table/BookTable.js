@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllbooksAction } from '../../Pages/Book/bookAction';
+import { deleteBookAction, getAllbooksAction } from '../../Pages/Book/bookAction';
 import { CustomModal } from '../Custom-Modal/CustomModal';
 import { EditBook } from '../Edit-Book/EditBook';
 import { setShowModal } from '../../SystemConfig/systemSlice';
-
+import { GrEdit } from 'react-icons/gr'
+import { AiFillDelete } from 'react-icons/ai'
 
 export const BookTable = () => {
     const { book } = useSelector(state => state.book);
@@ -19,9 +20,13 @@ export const BookTable = () => {
     }, [dispatch, book]);
 
     const handleOnEdit = (obj) => {
-
         setSelectedBook(obj);
-        dispatch(setShowModal)
+        dispatch(setShowModal(true))
+    };
+    const handelOnDelete = (id) => {
+        if (window.confirm('Are you sure you want to delete this book?')) {
+            dispatch(deleteBookAction(id))
+        }
     };
 
     return (
@@ -31,6 +36,7 @@ export const BookTable = () => {
             </CustomModal>
 
             <Table striped bordered hover responsive className='custom-table'>
+
                 <thead>
                     <tr>
                         <th>Thumbnail</th>
@@ -49,13 +55,23 @@ export const BookTable = () => {
                                 <p>{item.authorName} - {item.publishedYear}</p>
                                 <p className='summary'>{item?.summary}</p>
                             </td>
-                            <td>
-                                <Button variant='warning' onClick={() => { handleOnEdit(item) }}>Edit </Button>
+                            <td className='edit-column'>
+                                <Row>
+                                    <Col className='mb-4'>
+                                        <Button variant='warning' className='p-3 fs-5 text-bg-lights' onClick={() => { handleOnEdit(item) }}><GrEdit /></Button>
+                                    </Col>
+                                    <Col>
+                                        <Button variant='danger' className='p-3 fs-5' onClick={() => handelOnDelete(item.id)}>
+                                            <AiFillDelete />
+                                        </Button>
+
+                                    </Col>
+                                </Row>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
-        </Container>
+        </Container >
     );
 };

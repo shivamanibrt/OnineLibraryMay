@@ -63,6 +63,15 @@
 .custom-table .summary {
     word-wrap: break-word;
 }
+.edit-column {
+    width: 10%;
+    white-space: nowrap;
+    padding: 0;
+}
+
+.edit-column button {
+    width: 100%;
+}
 
 .footer {
     min-width: 100vw;

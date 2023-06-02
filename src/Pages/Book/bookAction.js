@@ -1,7 +1,8 @@
 import { toast } from "react-toastify";
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query } from "firebase/firestore";
 import { db } from "../../Config/firebase-config";
 import { setBook } from "./BookSlice";
+import { setShowModal } from "../../SystemConfig/systemSlice";
 
 
 export const getAllbooksAction = () => async (dispatch) => {
@@ -42,5 +43,17 @@ export const addNewBookAction = (bookObj) => async (dispatch) => {
     } catch (error) {
         // Display an error toast message if there is an error
         toast.error('Error.message', error);
+    }
+};
+
+
+//Delete book 
+export const deleteBookAction = (id) => async (dispatch) => {
+    try {
+        await deleteDoc(doc(db, 'books', id));
+        dispatch(getAllbooksAction());
+        dispatch(setShowModal(false));
+    } catch (error) {
+        toast.error('Error Message:', error);
     }
 };

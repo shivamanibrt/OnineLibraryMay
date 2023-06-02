@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
 import { Button, Container, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { CustomInput } from '../../Components/CustomInput/CustomInput';
-import { addNewBookAction } from '../../Pages/Book/bookAction';
 import { useDispatch } from 'react-redux';
 
 export const EditBook = ({ selectedBook }) => {
-    const [addBook, setAddBook] = useState({});
+    const [editBook, setEditBook] = useState({});
     const dispatch = useDispatch();
 
-    const navigate = useNavigate();
-
-
+    useEffect(() => {
+        setEditBook(selectedBook)
+    }, [selectedBook])
     const handleOnChange = (e) => {
         const { name, value } = e.target;
-        setAddBook({ ...addBook, [name]: value });
+        setEditBook({ ...editBook, [name]: value });
     };
 
     const handleOnSubmit = async (e) => {
@@ -24,7 +22,7 @@ export const EditBook = ({ selectedBook }) => {
             e.preventDefault();
 
             // dispatch(addNewBookAction(addBook));
-            navigate('/books');
+
 
         } catch (error) {
             toast.error(error.message);
@@ -39,7 +37,8 @@ export const EditBook = ({ selectedBook }) => {
             type: 'text',
             placeholder: 'James Clear',
             required: true,
-            value: selectedBook.title
+            value: editBook.authorName
+
         },
         {
             label: 'Published Year',
@@ -47,6 +46,7 @@ export const EditBook = ({ selectedBook }) => {
             type: 'number',
             placeholder: '2018',
             required: true,
+            value: editBook.publishedYear
         },
         {
             label: 'Book Title',
@@ -54,6 +54,7 @@ export const EditBook = ({ selectedBook }) => {
             type: 'text',
             placeholder: 'Atomic Habits',
             required: true,
+            value: editBook.bookTitle
         },
         {
             label: 'Book URL',
@@ -61,6 +62,7 @@ export const EditBook = ({ selectedBook }) => {
             type: 'url',
             placeholder: 'http://image-url.com',
             required: true,
+            value: editBook.bookUrl
         },
         {
             label: 'Summary',
@@ -70,6 +72,7 @@ export const EditBook = ({ selectedBook }) => {
             placeholder: 'Write Book summary',
             style: { height: '200px', resize: 'none' },
             required: true,
+            value: editBook.summary
         },
     ];
 
@@ -86,7 +89,7 @@ export const EditBook = ({ selectedBook }) => {
                     ))}
                 </div>
                 <div className="d-grid">
-                    <Button variant="primary" type="submit">
+                    <Button variant="warning" type="submit">
                         Update Book
                     </Button>
                 </div>

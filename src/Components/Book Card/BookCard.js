@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 export const BookCard = (item) => {
     return (
-        <Card style={{ width: '18rem', height: '200px', marginBottom: '20px' }}>
+        <Card style={{ width: '18rem', marginBottom: '20px' }}>
             <Card.Img variant="top" src={item?.url} />
             <Card.Body>
                 <Card.Title>{item?.bookTitle}</Card.Title>
