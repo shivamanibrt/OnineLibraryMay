@@ -23,9 +23,9 @@ export const Home = () => {
                 </Row>
                 <Row className='p-5  mb-2'>
                     {book.map((item, i) => (
-                        <Col className="d-flex gap-2 flex-wrap justify-content-around">
+                        <Col key={i} className="d-flex gap-2 flex-wrap justify-content-around">
                             <div className="d-flex justify-content-center" >
-                                <BookCard {...item} key={i} />
+                                <BookCard {...item} />
                             </div>
                         </Col>
                     ))}

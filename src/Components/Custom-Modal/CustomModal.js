@@ -17,7 +17,7 @@ export const CustomModal = ({ heading, children }) => {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title id="contained-modal-title-vcenter">
+                    <Modal.Title id="contained-modal-title-vcenter" className='text-center'>
                         {heading}
                     </Modal.Title>
                 </Modal.Header>

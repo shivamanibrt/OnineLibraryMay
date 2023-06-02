@@ -1,33 +1,30 @@
 import React, { useEffect, useState } from 'react';
-
 import { Button, Container, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { CustomInput } from '../../Components/CustomInput/CustomInput';
 import { useDispatch } from 'react-redux';
+import { updateBookDetail } from '../../Pages/Book/bookAction';
 
 export const EditBook = ({ selectedBook }) => {
     const [editBook, setEditBook] = useState({});
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setEditBook(selectedBook)
-    }, [selectedBook])
+        setEditBook(selectedBook);
+    }, [selectedBook]);
+
     const handleOnChange = (e) => {
         const { name, value } = e.target;
         setEditBook({ ...editBook, [name]: value });
     };
 
     const handleOnSubmit = async (e) => {
+        e.preventDefault();
         try {
-            e.preventDefault();
-
-            // dispatch(addNewBookAction(addBook));
-
-
+            dispatch(updateBookDetail(selectedBook.id, editBook));
         } catch (error) {
             toast.error(error.message);
         }
-
     };
 
     const inputs = [
@@ -37,8 +34,7 @@ export const EditBook = ({ selectedBook }) => {
             type: 'text',
             placeholder: 'James Clear',
             required: true,
-            value: editBook.authorName
-
+            value: editBook.authorName || ''
         },
         {
             label: 'Published Year',
@@ -46,7 +42,7 @@ export const EditBook = ({ selectedBook }) => {
             type: 'number',
             placeholder: '2018',
             required: true,
-            value: editBook.publishedYear
+            value: editBook.publishedYear || ''
         },
         {
             label: 'Book Title',
@@ -54,7 +50,7 @@ export const EditBook = ({ selectedBook }) => {
             type: 'text',
             placeholder: 'Atomic Habits',
             required: true,
-            value: editBook.bookTitle
+            value: editBook.bookTitle || ''
         },
         {
             label: 'Book URL',
@@ -62,7 +58,7 @@ export const EditBook = ({ selectedBook }) => {
             type: 'url',
             placeholder: 'http://image-url.com',
             required: true,
-            value: editBook.bookUrl
+            value: editBook.bookUrl || ''
         },
         {
             label: 'Summary',
@@ -72,17 +68,13 @@ export const EditBook = ({ selectedBook }) => {
             placeholder: 'Write Book summary',
             style: { height: '200px', resize: 'none' },
             required: true,
-            value: editBook.summary
-        },
+            value: editBook.summary || ''
+        }
     ];
 
     return (
         <Container>
-            <Form
-                className="p-1  m-auto"
-                style={{ maxWidth: '100%' }}
-                onSubmit={handleOnSubmit}
-            >
+            <Form className="p-1 m-auto" style={{ maxWidth: '100%' }} onSubmit={handleOnSubmit}>
                 <div className="mt-2">
                     {inputs.map((item, i) => (
                         <CustomInput key={i} {...item} onChange={handleOnChange} />
@@ -94,8 +86,6 @@ export const EditBook = ({ selectedBook }) => {
                     </Button>
                 </div>
             </Form>
-
         </Container>
-
     );
 };
