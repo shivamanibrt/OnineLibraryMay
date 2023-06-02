@@ -29,7 +29,7 @@
 }
 
 .carousel-image.dark-overlay {
-    filter: brightness(80%);
+    filter: brightness(40%);
 }
 
 .caption-text {
@@ -54,6 +54,14 @@
 
 .nav-links li a:hover {
     color: #666666;
+}
+.custom-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.custom-table .summary {
+    word-wrap: break-word;
 }
 
 .footer {
