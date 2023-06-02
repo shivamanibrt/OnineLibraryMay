@@ -63,6 +63,11 @@
 .custom-table .summary {
     word-wrap: break-word;
 }
+.summary {
+    max-height: 200px; /* Adjust the height as needed */
+    overflow-y: scroll;
+}
+
 .edit-column {
     width: 10%;
     white-space: nowrap;

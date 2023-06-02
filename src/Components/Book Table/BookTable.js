@@ -13,7 +13,7 @@ export const BookTable = () => {
     const { book } = useSelector(state => state.book);
     const dispatch = useDispatch();
 
-    const [selectedBook, setSelectedBook] = useState({})
+    const [selectedBook, setSelectedBook] = useState({});
 
     useEffect(() => {
         !book.length && dispatch(getAllbooksAction());
@@ -21,11 +21,12 @@ export const BookTable = () => {
 
     const handleOnEdit = (obj) => {
         setSelectedBook(obj);
-        dispatch(setShowModal(true))
+        dispatch(setShowModal(true));
     };
-    const handelOnDelete = (id) => {
+
+    const handleOnDelete = (id) => {
         if (window.confirm('Are you sure you want to delete this book?')) {
-            dispatch(deleteBookAction(id))
+            dispatch(deleteBookAction(id));
         }
     };
 
@@ -36,7 +37,6 @@ export const BookTable = () => {
             </CustomModal>
 
             <Table striped bordered hover responsive className='custom-table'>
-
                 <thead>
                     <tr>
                         <th>Thumbnail</th>
@@ -53,18 +53,17 @@ export const BookTable = () => {
                             <td>
                                 <h3>{item.bookTitle}</h3>
                                 <p>{item.authorName} - {item.publishedYear}</p>
-                                <p className='summary'>{item?.summary}</p>
+                                <p className='summary bg-light p-2'>{item?.summary}</p>
                             </td>
                             <td className='edit-column'>
                                 <Row>
                                     <Col className='mb-4'>
-                                        <Button variant='warning' className='p-3 fs-5 text-bg-lights' onClick={() => { handleOnEdit(item) }}><GrEdit /></Button>
+                                        <Button variant='warning' className='p-3 fs-5 text-bg-lights' onClick={() => handleOnEdit(item)}><GrEdit /></Button>
                                     </Col>
                                     <Col>
-                                        <Button variant='danger' className='p-3 fs-5' onClick={() => handelOnDelete(item.id)}>
+                                        <Button variant='danger' className='p-3 fs-5' onClick={() => handleOnDelete(item.id)}>
                                             <AiFillDelete />
                                         </Button>
-
                                     </Col>
                                 </Row>
                             </td>
@@ -72,6 +71,6 @@ export const BookTable = () => {
                     ))}
                 </tbody>
             </Table>
-        </Container >
+        </Container>
     );
 };
