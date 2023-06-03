@@ -20,11 +20,11 @@ export const Books = () => {
     return (
         <>
             <UserLayout>
-                <div className='p-2 text-center'>
+                <div className='p-2 text-secondary'>
                     <h3>
                         Books Components
                     </h3>
-                    <hr />
+
                     <div >
 
                         <Container className='mt-3 text-start' >

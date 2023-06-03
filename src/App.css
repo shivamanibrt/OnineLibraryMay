@@ -1,3 +1,6 @@
+.nav-bar {
+    border-bottom: 1px solid #b2b2b2;
+}
 .user-layout {
     display: flex;
     min-height: 100vh;
@@ -6,6 +9,7 @@
 .left {
     width: 30%;
     min-height: 100vh;
+    border-right: 1px solid #b2b2b2;
 }
 
 .right {
@@ -49,7 +53,7 @@
 
 .nav-links li a {
     text-decoration: none;
-    color: #fff;
+    color: #3c4048;
 }
 
 .nav-links li a:hover {
@@ -80,4 +84,8 @@
 
 .footer {
     min-width: 100vw;
+}
+.icon-label {
+    display: inline-block;
+    margin-left: 8px;
 }

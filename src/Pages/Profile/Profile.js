@@ -95,10 +95,10 @@ export const Profile = () => {
     return (
         <>
             <UserLayout>
-                <div className='p-2 '>
+                <div className='p-2 text-secondary'>
                     <h3>Profile</h3>
-                    <hr />
-                    <Container className='mt-2 mb-5'>
+
+                    <Container className='mt-5  mb-5'>
                         <Form className='border p-5 shadow-lg rounded m-auto' style={{ width: '80%' }} onSubmit={handleOnSubmit}>
                             {inputs.map((item, i) => (
                                 <CustomInput key={i} {...item} onChange={handleOnChange} />

@@ -6,11 +6,11 @@ export const User = () => {
     return (
         <>
             <UserLayout>
-                <div className='p-2 text-center'>
+                <div className='p-2 text-secondary'>
                     <h3>
                         User Components
                     </h3>
-                    <hr />
+
                 </div>
 
             </UserLayout>

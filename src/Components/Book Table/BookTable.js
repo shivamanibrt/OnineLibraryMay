@@ -38,7 +38,7 @@ export const BookTable = () => {
             <Row>
                 <h1>{book.length} Books found</h1>
             </Row>
-            <Table striped bordered hover responsive className='custom-table'>
+            <Table striped bordered hover responsive className='custom-table' style={{ overflow: 'scroll' }}>
                 <thead>
                     <tr>
 

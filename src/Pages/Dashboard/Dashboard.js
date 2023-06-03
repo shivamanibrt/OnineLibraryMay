@@ -27,11 +27,10 @@ export const Dashboard = () => {
     return (
         <>
             <UserLayout>
-                <div className='p-2 text-center'>
-                    <h3>Welcome to Dashboard</h3>
-                    <hr />
+                <div className='p-2'>
+                    <h3 className='text-secondary'>Welcome to Dashboard</h3>
 
-                    <div className=" p-5 rounded shadow-lg">
+                    <div className="mt-3 p-5 rounded shadow-lg">
                         <Form>
                             <Row className="gap-1">
                                 <Col md="9">

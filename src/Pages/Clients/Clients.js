@@ -10,11 +10,11 @@ export const Clients = () => {
     return (
         <>
             <UserLayout>
-                <div className='p-2 text-center'>
+                <div className='p-2 '>
                     <h3>
                         Clients
                     </h3>
-                    <hr />
+
                     <Table striped bordered hover>
                         <thead>
                             <tr>

@@ -30,7 +30,7 @@ export const Header = () => {
     };
 
     return (
-        <Navbar collapseOnSelect expand="lg" style={{ fontSize: '30px' }} >
+        <Navbar collapseOnSelect expand="lg" style={{ fontSize: '30px' }} className='nav-bar' >
             <Container>
                 <Navbar.Brand as={Link} to="/" style={{ fontSize: '30px' }} >
                     <IoIosBook className='icon-light' />
