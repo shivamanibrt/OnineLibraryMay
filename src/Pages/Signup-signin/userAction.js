@@ -1,9 +1,8 @@
 import { toast } from "react-toastify"
 import { auth, db, } from "../../Config/firebase-config"
 import { signInWithEmailAndPassword } from "firebase/auth"
-import { doc, getDoc } from "firebase/firestore"
+import { doc, getDoc, setDoc } from "firebase/firestore"
 import { setUser } from "../Redux/User/userSlice"
-
 
 
 export const getUserAction = (uid) => async (dispatch) => {
@@ -19,7 +18,6 @@ export const getUserAction = (uid) => async (dispatch) => {
 
     } catch (error) {
         toast.error(error.message)
-
     }
 }
 //create new user 
@@ -40,4 +38,16 @@ export const loginUser = (data) => async (dispatch) => {
 
     }
 }
+
+//Update user Profile Details
+export const updateProfileAction = ({ id, ...rest }) => async (dispatch) => {
+    try {
+        await setDoc(doc(db, "users", id), rest); // Corrected line
+        dispatch(getUserAction(id));
+        toast.success("Your account has been updated successfully");
+    } catch (error) {
+        toast.error('Error Message: ', error);
+    }
+};
+
 
