@@ -35,27 +35,32 @@ export const BookTable = () => {
             <CustomModal heading='Edit book'>
                 <EditBook selectedBook={selectedBook} />
             </CustomModal>
-
+            <Row>
+                <h1>{book.length} Books found</h1>
+            </Row>
             <Table striped bordered hover responsive className='custom-table'>
                 <thead>
                     <tr>
+
                         <th>Thumbnail</th>
                         <th>Info</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {book.map((item) => (
+                    {book.map((item, i) => (
                         <tr key={item.id}>
+
                             <td>
                                 <img src={item.bookUrl} alt='' style={{ width: '100%', height: '100%' }} />
                             </td>
                             <td>
-                                <h3>{item.bookTitle}</h3>
+                                <h3> {item.bookTitle}</h3>
                                 <p>{item.authorName} - {item.publishedYear}</p>
                                 <p className='summary bg-light p-2'>{item?.summary}</p>
                             </td>
                             <td className='edit-column'>
+                                <p className='text-center text-secondary'>Book Number {i + 1}<hr /></p>
                                 <Row>
                                     <Col className='mb-4'>
                                         <Button variant='warning' className='p-3 fs-5 text-bg-lights' onClick={() => handleOnEdit(item)}><GrEdit /></Button>
