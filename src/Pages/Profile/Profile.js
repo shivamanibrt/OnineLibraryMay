@@ -95,7 +95,7 @@ export const Profile = () => {
     return (
         <>
             <UserLayout>
-                <div className='p-2 text-center'>
+                <div className='p-2 '>
                     <h3>Profile</h3>
                     <hr />
                     <Container className='mt-2 mb-5'>
