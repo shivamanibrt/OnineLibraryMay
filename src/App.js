@@ -31,7 +31,6 @@ function App() {
     <>
       <MainLayout>
         <Routes>
-
           <Route path='/' element={<Home />} />
           <Route path='signIn' element={<SignIn />} />
           <Route path='signUp' element={<SignUp />} />
@@ -43,14 +42,10 @@ function App() {
           <Route path='clients' element={<Clients />} />
           <Route path='history' element={<History />} />
           <Route path='user' element={<User />} />
-
-
         </Routes>
         <ToastContainer />
       </MainLayout >
-
     </>
-
   );
 }
 
