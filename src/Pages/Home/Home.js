@@ -21,9 +21,9 @@ export const Home = () => {
                     <h1>{book.length} Books found !</h1>
                     <hr />
                 </Row>
-                <Row className='p-5  mb-2'>
-                    {book.map((item, i) => (
-                        <Col key={i} className="d-flex gap-2 flex-wrap justify-content-around">
+                <Row className='p-2  mb-2'>
+                    {book.map((item) => (
+                        <Col key={item.id} className="d-flex gap-2 flex-wrap justify-content-around">
                             <div className="d-flex justify-content-center" >
                                 <BookCard {...item} />
                             </div>

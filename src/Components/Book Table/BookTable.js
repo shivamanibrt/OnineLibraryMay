@@ -48,7 +48,7 @@ export const BookTable = () => {
                     {book.map((item) => (
                         <tr key={item.id}>
                             <td>
-                                <img src={item.bookUrl} alt='' />
+                                <img src={item.bookUrl} alt='' style={{ width: '100%', height: '100%' }} />
                             </td>
                             <td>
                                 <h3>{item.bookTitle}</h3>
