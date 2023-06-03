@@ -4,6 +4,9 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { CustomInput } from '../../Components/CustomInput/CustomInput';
 import { updateProfileAction } from '../Signup-signin/userAction';
+import { toast } from 'react-toastify';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../../Config/firebase-config';
 
 export const Profile = () => {
     const dispatch = useDispatch();
@@ -26,13 +29,31 @@ export const Profile = () => {
     const handleOnSubmit = e => {
         e.preventDefault();
         if (!window.confirm("Are you sure you want to update your profile?")) return;
-        const { email, uid, ...rest } = form;
+        const { uid, ...rest } = form;
         const obj = { id: uid, ...rest };
         dispatch(updateProfileAction(obj));
     };
 
     const handelOnPasswordReset = e => {
-        e.preventDefault();
+        try {
+            if (window.confirm(
+                'Are you sure you want to reset password'
+            )) {
+                sendPasswordResetEmail(auth, form.email)
+                    .then((resp) => {
+                        console.log(resp);
+
+                        toast.success("Password rest email has been sent");
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        toast.error(error.message);
+                    });
+            }
+        } catch (error) {
+            toast.error('Error Message: ', error)
+
+        }
     };
 
     const inputs = [
