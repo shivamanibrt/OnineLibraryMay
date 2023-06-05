@@ -17,6 +17,7 @@ import { History } from './Pages/History/History';
 import { User } from './Pages/User/User';
 import { Profile } from './Pages/Profile/Profile';
 import { NewBooks } from './Pages/Book/NewBooks';
+import { BookLanding } from './Components/Book Card/BookLanding';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
       <MainLayout>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/book/:bookId' element={<BookLanding />} />
           <Route path='signIn' element={<SignIn />} />
           <Route path='signUp' element={<SignUp />} />
 

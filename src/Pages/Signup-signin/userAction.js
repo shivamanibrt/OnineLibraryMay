@@ -1,9 +1,29 @@
 import { toast } from "react-toastify"
 import { auth, db, } from "../../Config/firebase-config"
 import { signInWithEmailAndPassword } from "firebase/auth"
-import { doc, getDoc, setDoc } from "firebase/firestore"
-import { setUser } from "../Redux/User/userSlice"
+import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore"
+import { setUserCount, setUser, setUserData } from "../Redux/User/userSlice"
 
+export const getAllUser = () => async (dispatch) => {
+    try {
+        const querySnapshot = await getDocs(collection(db, 'users'));
+        const userCount = querySnapshot.size;
+        dispatch(setUserCount(userCount));
+    } catch (error) {
+        toast.error(error.message);
+    }
+};
+// ...
+
+export const fetchUserData = () => async (dispatch) => {
+    try {
+        const querySnapshot = await getDocs(collection(db, 'users'));
+        const usersData = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+        dispatch(setUserData(usersData));
+    } catch (error) {
+        toast.error(error.message);
+    }
+};
 
 export const getUserAction = (uid) => async (dispatch) => {
 
@@ -42,7 +62,7 @@ export const loginUser = (data) => async (dispatch) => {
 //Update user Profile Details
 export const updateProfileAction = ({ id, ...rest }) => async (dispatch) => {
     try {
-        await setDoc(doc(db, "users", id), rest); // Corrected line
+        await setDoc(doc(db, "users", id), rest, { merge: true });
         dispatch(getUserAction(id));
         toast.success("Your account has been updated successfully");
     } catch (error) {

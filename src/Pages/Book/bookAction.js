@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
-import { addDoc, collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
 import { db } from '../../Config/firebase-config';
-import { setBook } from './BookSlice';
+import { setBook, setSelectedBooks } from './BookSlice';
 import { setShowModal } from '../../SystemConfig/systemSlice';
 
 export const getAllbooksAction = () => async (dispatch) => {
@@ -46,3 +46,41 @@ export const updateBookDetail = (id, updatedData) => async (dispatch) => {
         toast.error(error.message);
     }
 };
+
+//const this displays the readmore button into new pages
+export const fetchBookByIdAction = (id) => async (dispatch) => {
+    try {
+        const docRef = await doc(db, 'books', id);
+        const docSnapshot = await getDoc(docRef);
+
+        const bookData = docSnapshot.data();
+        const borrowingBooksData = { ...bookData, id: docSnapshot.id };
+        dispatch(setSelectedBooks(borrowingBooksData));
+        console.log(borrowingBooksData)
+
+    } catch (error) {
+        toast.error(error);
+    }
+};
+//burrow book
+
+export const createNewBurrowAction = (obj) => async (dispatch) => {
+    try {
+        const docRef = await addDoc(collection(db, 'burrowHistory'), obj)
+        if (docRef?.id) {
+            toast.success('New burrowing item has been added.')
+            //update the books isAvailable:false,availableFrom:Date
+            const updateObj = {
+                isAvailable: false,
+                availableFrom: obj?.returnAt,
+                id: obj?.bookId
+            }
+            //not fetch all the books from database and mount to our redux
+            dispatch(updateBookDetail(updateObj.id, updateObj));
+            return;
+        }
+    } catch (error) {
+        toast.error('Error Message :', error)
+
+    }
+}
