@@ -16,7 +16,9 @@ export const getAllbooksAction = () => async (dispatch) => {
 
 export const addNewBookAction = (bookObj) => async (dispatch) => {
     try {
-        const docRef = await addDoc(collection(db, 'books'), bookObj);
+        const bookWithAvailability = { ...bookObj, isAvailable: true }; // Add isAvailable property with value true
+
+        const docRef = await addDoc(collection(db, 'books'), bookWithAvailability);
         if (docRef?.id) {
             toast.success('New Book has been added.');
             dispatch(getAllbooksAction());
@@ -25,6 +27,7 @@ export const addNewBookAction = (bookObj) => async (dispatch) => {
         toast.error(error.message);
     }
 };
+
 
 export const deleteBookAction = (id) => async (dispatch) => {
     try {
@@ -50,18 +53,22 @@ export const updateBookDetail = (id, updatedData) => async (dispatch) => {
 //const this displays the readmore button into new pages
 export const fetchBookByIdAction = (id) => async (dispatch) => {
     try {
-        const docRef = await doc(db, 'books', id);
+        const docRef = doc(db, 'books', id);
         const docSnapshot = await getDoc(docRef);
 
         const bookData = docSnapshot.data();
         const borrowingBooksData = { ...bookData, id: docSnapshot.id };
-        dispatch(setSelectedBooks(borrowingBooksData));
-        console.log(borrowingBooksData)
 
+        if (borrowingBooksData.isAvailable) {
+            dispatch(setSelectedBooks({ ...borrowingBooksData, isAvailable: false }));
+        } else {
+            dispatch(setSelectedBooks(borrowingBooksData));
+        }
     } catch (error) {
         toast.error(error);
     }
 };
+
 //burrow book
 
 export const createNewBurrowAction = (obj) => async (dispatch) => {
@@ -72,15 +79,14 @@ export const createNewBurrowAction = (obj) => async (dispatch) => {
             //update the books isAvailable:false,availableFrom:Date
             const updateObj = {
                 isAvailable: false,
-                availableFrom: obj?.returnAt,
+                availableFrom: obj?.returnDate,
                 id: obj?.bookId
             }
             //not fetch all the books from database and mount to our redux
-            dispatch(updateBookDetail(updateObj.id, updateObj));
+            dispatch(updateBookDetail(updateObj));
             return;
         }
     } catch (error) {
-        toast.error('Error Message :', error)
-
+        toast.error('Error Message: ' + error);
     }
 }

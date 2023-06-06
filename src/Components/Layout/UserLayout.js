@@ -5,7 +5,6 @@ import { Modal } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { AiFillDashboard } from 'react-icons/ai';
 import { FiBook } from 'react-icons/fi';
-import { AiOutlineUserAdd } from 'react-icons/ai';
 import { AiOutlineUsergroupDelete } from 'react-icons/ai';
 import { FaHistory } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
@@ -36,12 +35,7 @@ export const UserLayout = ({ children }) => {
 
                                         </Link>
                                     </li>
-                                    <li className='nav-item'>
-                                        <Link to='/clients' className='nav-link'>
-                                            <AiOutlineUserAdd size={25} />
 
-                                        </Link>
-                                    </li>
                                     <li className='nav-item'>
                                         <Link to='/history' className='nav-link'>
                                             <FaHistory size={25} />

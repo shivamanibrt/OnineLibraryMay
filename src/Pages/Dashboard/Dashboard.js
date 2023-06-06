@@ -22,7 +22,7 @@ export const Dashboard = () => {
     useEffect(() => {
         dispatch(getAllbooksAction());
         dispatch(getAllUser());
-    }, [dispatch]);
+    }, [dispatch, user]);
 
     const handleOnSearch = () => {
         const filteredBooks = book.filter((item) => {
@@ -39,7 +39,7 @@ export const Dashboard = () => {
                 <div className='p-2'>
                     <div className='text-secondary mb-3'>
                         <h3 >Welcome to Dashboard</h3>
-                        {user?.role.toUpperCase()} /  Dashboard
+                        {user?.role} /  Dashboard
                     </div>
 
                     <Container className='mb-3'>

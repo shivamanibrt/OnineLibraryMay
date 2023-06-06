@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchBookByIdAction } from '../../Pages/Book/bookAction';
 
-
 export const BookCard = (item) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();

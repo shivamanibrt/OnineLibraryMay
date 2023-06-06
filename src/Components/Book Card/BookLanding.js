@@ -1,59 +1,66 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
 import { UserLayout } from '../Layout/UserLayout';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { createNewBurrowAction, fetchBookByIdAction } from '../../Pages/Book/bookAction';
+import { createNewBurrowAction, fetchBookByIdAction, getAllbooksAction } from '../../Pages/Book/bookAction';
 
 export const BookLanding = () => {
     const { id } = useParams();
-    const { selectedBooks } = useSelector((state) => state.book);
+    const { selectedBooks, book } = useSelector(state => state.book);
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.user)
+    const { user } = useSelector((state) => state.user);
 
-    const { isAvailable, returnDate } = selectedBooks;
+    const { availableFrom } = selectedBooks;
+    let isAvailable = book?.isAvailable || true;
+    let todaysDate;
+
+    if (availableFrom) {
+        todaysDate = new Date(availableFrom).toLocaleDateString();
+    }
+
     useEffect(() => {
         dispatch(fetchBookByIdAction(id));
+        dispatch(getAllbooksAction());
     }, [id, dispatch]);
 
     const handelOnBorrow = () => {
-        const defaultburrowDay = 14;
+        const defaultBurrowDay = 14;
         if (user?.uid) {
             const obj = {
-                bookId: selectedBooks?.id,
+                bookId: selectedBooks.id,
                 bookName: selectedBooks.bookTitle,
-                userId: user?.uid,
-                hasReturned: false,
+                userId: user.uid,
+                name: user.fName,
                 burrowTime: Date.now(),
-                returnDate: Date.now() + (defaultburrowDay * 24 * 60 * 60 * 1000)
-            }
+                returnDate: Date.now() + defaultBurrowDay * 24 * 60 * 60 * 1000,
+                hasReturned: false,
+            };
             dispatch(createNewBurrowAction(obj));
             console.log(obj);
             return;
         }
-        alert('Please login to burrow the book')
-
-    }
+        alert('Please login to borrow the book');
+    };
 
     return (
         <div>
             <UserLayout>
-                <Container className=''>
-
-                    <div className='book-layout p-3 mb-2 shadow-lg'>
-                        {!user?.uid ? (
-                            <Button className='mb-3' onClick={handelOnBorrow}>Login to borrow book</Button>
-                        ) : (
-                            isAvailable ? (
-                                <Button className='mb-3' onClick={handelOnBorrow}>Borrow this book</Button>
+                <Container>
+                    <div className="book-layout p-3 mb-2 shadow-lg">
+                        <div className="mb-3">
+                            {!user?.uid ? (
+                                <Button disabled={!user?.uid}>Login to borrow</Button>
+                            ) : isAvailable ? (
+                                <Button onClick={handelOnBorrow}>Borrow Now</Button>
                             ) : (
-                                <Button className='mb-3'>Available from : 10{returnDate}</Button>
-                            )
-                        )}
+                                <Button variant="warning">Available from: {todaysDate}</Button>
+                            )}
+                        </div>
+
                         <Row>
                             <Col>
-                                <img src={selectedBooks.bookUrl} alt='bookImage' style={{ width: '100%', height: '100%' }} />
+                                <img src={selectedBooks.bookUrl} alt="bookImage" style={{ width: '100%', height: '100%' }} />
                             </Col>
                             <Col>
                                 <h1>{selectedBooks.bookTitle}</h1>
@@ -61,9 +68,8 @@ export const BookLanding = () => {
                             </Col>
                         </Row>
                     </div>
-
                 </Container>
             </UserLayout>
-        </div >
+        </div>
     );
 };

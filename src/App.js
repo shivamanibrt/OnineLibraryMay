@@ -12,7 +12,6 @@ import { auth } from './Config/firebase-config';
 import { getUserAction } from './Pages/Signup-signin/userAction';
 import { Books } from './Pages/Book/Books';
 import { MainLayout } from './Components/Layout/MainLayout'
-import { Clients } from './Pages/Clients/Clients';
 import { History } from './Pages/History/History';
 import { User } from './Pages/User/User';
 import { Profile } from './Pages/Profile/Profile';
@@ -41,7 +40,7 @@ function App() {
           <Route path='profile' element={<Profile />} />
           <Route path='books' element={<Books />} />
           <Route path='newBooks' element={<NewBooks />} />
-          <Route path='clients' element={<Clients />} />
+
           <Route path='history' element={<History />} />
           <Route path='user' element={<User />} />
         </Routes>

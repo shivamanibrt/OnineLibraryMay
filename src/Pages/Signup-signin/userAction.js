@@ -2,28 +2,19 @@ import { toast } from "react-toastify"
 import { auth, db, } from "../../Config/firebase-config"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore"
-import { setUserCount, setUser, setUserData } from "../Redux/User/userSlice"
+import { setUserCount, setUser } from "../Redux/User/userSlice"
 
 export const getAllUser = () => async (dispatch) => {
     try {
         const querySnapshot = await getDocs(collection(db, 'users'));
         const userCount = querySnapshot.size;
+
         dispatch(setUserCount(userCount));
     } catch (error) {
         toast.error(error.message);
     }
 };
-// ...
 
-export const fetchUserData = () => async (dispatch) => {
-    try {
-        const querySnapshot = await getDocs(collection(db, 'users'));
-        const usersData = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-        dispatch(setUserData(usersData));
-    } catch (error) {
-        toast.error(error.message);
-    }
-};
 
 export const getUserAction = (uid) => async (dispatch) => {
 
