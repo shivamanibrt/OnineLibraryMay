@@ -1,9 +1,10 @@
 import { toast } from 'react-toastify';
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, setDoc } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore';
 import { db } from '../../Config/firebase-config';
-import { setBook, setSelectedBooks } from './BookSlice';
+import { setBook, setBurrowBooksHistory, setSelectedBooks } from './BookSlice';
 import { setShowModal } from '../../SystemConfig/systemSlice';
 
+// Action to get all books
 export const getAllbooksAction = () => async (dispatch) => {
     try {
         const querySnapshot = await getDocs(collection(db, 'books'));
@@ -14,6 +15,7 @@ export const getAllbooksAction = () => async (dispatch) => {
     }
 };
 
+// Action to add a new book
 export const addNewBookAction = (bookObj) => async (dispatch) => {
     try {
         const bookWithAvailability = { ...bookObj, isAvailable: true }; // Add isAvailable property with value true
@@ -28,7 +30,7 @@ export const addNewBookAction = (bookObj) => async (dispatch) => {
     }
 };
 
-
+// Action to delete a book
 export const deleteBookAction = (id) => async (dispatch) => {
     try {
         await deleteDoc(doc(db, 'books', id));
@@ -39,6 +41,7 @@ export const deleteBookAction = (id) => async (dispatch) => {
     }
 };
 
+// Action to update book details
 export const updateBookDetail = (id, updatedData) => async (dispatch) => {
     try {
         await setDoc(doc(db, 'books', id), updatedData, { merge: true });
@@ -50,7 +53,7 @@ export const updateBookDetail = (id, updatedData) => async (dispatch) => {
     }
 };
 
-//const this displays the readmore button into new pages
+// Action to fetch book by ID
 export const fetchBookByIdAction = (id) => async (dispatch) => {
     try {
         const docRef = doc(db, 'books', id);
@@ -69,24 +72,48 @@ export const fetchBookByIdAction = (id) => async (dispatch) => {
     }
 };
 
-//burrow book
-
+// Action to create a new burrow entry
 export const createNewBurrowAction = (obj) => async (dispatch) => {
     try {
-        const docRef = await addDoc(collection(db, 'burrowHistory'), obj)
+        const docRef = await addDoc(collection(db, 'burrowHistory'), obj);
         if (docRef?.id) {
-            toast.success('New burrowing item has been added.')
-            //update the books isAvailable:false,availableFrom:Date
+            toast.success('New burrowing item has been added.');
+            // Update the book's isAvailable status and availableFrom date
             const updateObj = {
                 isAvailable: false,
                 availableFrom: obj?.returnDate,
                 id: obj?.bookId
-            }
-            //not fetch all the books from database and mount to our redux
+            };
             dispatch(updateBookDetail(updateObj));
             return;
         }
     } catch (error) {
         toast.error('Error Message: ' + error);
     }
-}
+};
+
+// Action to get burrowed books history
+export const burrowBooksAction = (uid) => async (dispatch, getState) => {
+    try {
+        const { role } = getState().user.user;
+
+        let querySnapshot;
+        if (role === 'admin') {
+            querySnapshot = await getDocs(collection(db, 'burrowHistory'));
+        } else if (role === 'user') {
+            const q = query(collection(db, 'burrowHistory'), where('userId', '==', uid));
+            querySnapshot = await getDocs(q);
+        }
+
+        const burrowBooks = [];
+        querySnapshot.forEach((doc) => {
+            burrowBooks.push({
+                ...doc.data(),
+                id: doc.id,
+            });
+        });
+        dispatch(setBurrowBooksHistory(burrowBooks));
+    } catch (error) {
+        toast.error(error.message);
+    }
+};

@@ -6,6 +6,8 @@ import { GoSignIn } from 'react-icons/go';
 import { FiLogOut } from 'react-icons/fi';
 import { AiOutlineDashboard } from 'react-icons/ai';
 import { IoIosCreate } from 'react-icons/io';
+import { ImBooks } from 'react-icons/im';
+import { FcAbout } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../Config/firebase-config';
@@ -41,21 +43,37 @@ export const Header = () => {
                     <Nav>
                         {user?.uid ? (
                             <>
+                                <Nav.Link as={Link} to="/booksList" >
+                                    <ImBooks className='icon-light' /> Books
+                                </Nav.Link>
                                 <Nav.Link as={Link} to="/dashboard">
                                     <AiOutlineDashboard className='icon-light' /> Dashboard
+                                </Nav.Link>
+
+                                <Nav.Link as={Link} to="/about">
+                                    <FcAbout className='icon-light' /> About
                                 </Nav.Link>
                                 <Nav.Link as={Link} to="/" onClick={handleLogout}>
                                     <FiLogOut className='icon-light' /> Logout
                                 </Nav.Link>
+
+
                             </>
                         ) : (
                             <>
+                                <Nav.Link as={Link} to="/booksList" >
+                                    <ImBooks className='icon-light' /> Books
+                                </Nav.Link>
+                                <Nav.Link as={Link} to="/about">
+                                    <FcAbout className='icon-light' /> About
+                                </Nav.Link>
                                 <Nav.Link as={Link} to="/signIn" >
                                     <GoSignIn className='icon-light' /> SignIn
                                 </Nav.Link>
                                 <Nav.Link as={Link} to="/signUp">
                                     <IoIosCreate className='icon-light' /> SignUp
                                 </Nav.Link>
+
                             </>
                         )}
                     </Nav>

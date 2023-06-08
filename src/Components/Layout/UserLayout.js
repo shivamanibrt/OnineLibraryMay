@@ -69,12 +69,7 @@ export const UserLayout = ({ children }) => {
 
                                         </Link>
                                     </li>
-                                    <li className='nav-item'>
-                                        <Link to='/user' className='nav-link'>
-                                            <AiOutlineUsergroupDelete size={30} />
 
-                                        </Link>
-                                    </li>
                                     <li className='nav-item'>
                                         <Link to='/profile' className='nav-link'>
                                             <ImProfile size={30} />

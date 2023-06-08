@@ -17,6 +17,8 @@ import { User } from './Pages/User/User';
 import { Profile } from './Pages/Profile/Profile';
 import { NewBooks } from './Pages/Book/NewBooks';
 import { BookLanding } from './Components/Book Card/BookLanding';
+import { BooksList } from './Pages/Book/BooksList';
+import { About } from './Pages/About/About';
 
 
 function App() {
@@ -35,6 +37,9 @@ function App() {
           <Route path='/book/:bookId' element={<BookLanding />} />
           <Route path='signIn' element={<SignIn />} />
           <Route path='signUp' element={<SignUp />} />
+
+          <Route path='booksList' element={<BooksList />} />
+          <Route path='about' element={<About />} />
 
           <Route path='dashboard' element={<Dashboard />} />
           <Route path='profile' element={<Profile />} />

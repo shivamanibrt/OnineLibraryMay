@@ -7,12 +7,12 @@ import { createNewBurrowAction, fetchBookByIdAction, getAllbooksAction } from '.
 
 export const BookLanding = () => {
     const { id } = useParams();
-    const { selectedBooks, book } = useSelector(state => state.book);
+    const { selectedBooks } = useSelector(state => state.book);
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.user);
 
-    const { availableFrom } = selectedBooks;
-    let isAvailable = book?.isAvailable || true;
+    const { availableFrom, isAvailable } = selectedBooks;
+
     let todaysDate;
 
     if (availableFrom) {
@@ -25,7 +25,7 @@ export const BookLanding = () => {
     }, [id, dispatch]);
 
     const handelOnBorrow = () => {
-        const defaultBurrowDay = 14;
+        const defaultBurrowDay = 4;
         if (user?.uid) {
             const obj = {
                 bookId: selectedBooks.id,
