@@ -82,6 +82,10 @@
 .edit-column button {
     width: 100%;
 }
+.aboutImage {
+    height: 60vh;
+    width: 100vw;
+}
 
 .footer {
     min-width: 100vw;
