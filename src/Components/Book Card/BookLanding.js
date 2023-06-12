@@ -11,7 +11,8 @@ export const BookLanding = () => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.user);
 
-    const { availableFrom, isAvailable } = selectedBooks;
+    const { availableFrom } = selectedBooks;
+    const isAvailable = selectedBooks && selectedBooks.availableFrom;
 
     let todaysDate;
 
@@ -46,26 +47,23 @@ export const BookLanding = () => {
     return (
         <div>
             <UserLayout>
-                <Container>
-                    <div className="book-layout p-3 mb-2 shadow-lg">
-                        <div className="mb-3">
-                            {!user?.uid ? (
-                                <Button disabled={!user?.uid}>Login to borrow</Button>
-                            ) : isAvailable ? (
-                                <Button onClick={handelOnBorrow}>Borrow Now</Button>
-                            ) : (
-                                <Button variant="warning">Available from: {todaysDate}</Button>
-                            )}
-                        </div>
 
-                        <Row>
-                            <Col>
-                                <img src={selectedBooks.bookUrl} alt="bookImage" style={{ width: '100%', height: '100%' }} />
+                <Container className='mt-3 mb-3'>
+                    <div className='p-3 shadow-lg'>
+                        <Row >
+                            <div className="mb-3">
+                                {isAvailable ? (
+                                    <Button onClick={handelOnBorrow}>Borrow Now</Button>
+                                ) : (
+                                    <Button variant="warning">Available from: {todaysDate}</Button>
+                                )}
+                            </div>
+                            <h1>{selectedBooks.bookTitle}</h1>
+                            <Col xs={12} md={6} lg={4}>
+                                <img src={selectedBooks.bookUrl} className="d-block w-100" alt='booksImage' style={{ width: '200px' }} />
                             </Col>
-                            <Col>
-                                <h1>{selectedBooks.bookTitle}</h1>
-                                <p>{selectedBooks.summary}</p>
-                            </Col>
+                            <Col xs={12} md={6} lg={8} className='d-flex align-items-center mt-3'>
+                                <p>{selectedBooks.summary}</p> </Col>
                         </Row>
                     </div>
                 </Container>

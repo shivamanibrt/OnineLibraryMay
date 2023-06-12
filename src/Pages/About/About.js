@@ -8,21 +8,21 @@ import joinUsImg from '../../Asset/joinUs.jpg'
 import { useNavigate } from 'react-router-dom'
 
 export const About = () => {
+
     const navigate = useNavigate();
     const handelOnSubmit = (e) => {
         navigate('/signUp')
-
     }
     return (
-        <>
+        <div className='text-secondary'>
             <img src={aboutImg} alt='booksImage' className='aboutImage' />
-            <Row>
-                <Container>
+            <Container>
+                <Row>
                     <h5 className='mt-5 p-5 text-center'>
                         Welcome to SLibrary, your sanctuary for knowledge, inspiration, and community. Discover our curated collection of books, where learning thrives and personal growth blossoms. Immerse yourself in tranquil reading spaces, engage in lively discussions, and forge connections with like-minded individuals. With cutting-edge technology, our digital library is accessible anytime, anywhere. Join us at SLibrary, where every page holds transformative power.
                     </h5>
-                </Container>
-            </Row>
+                </Row>
+            </Container>
             <Container className='mt-3 mb-3'>
                 <div className='p-3 shadow-lg'>
                     <h2 className='text-center mb-4'>Our Mission</h2>
@@ -70,6 +70,6 @@ export const About = () => {
                     </Row>
                 </div>
             </Container>
-        </>
+        </div>
     )
 }

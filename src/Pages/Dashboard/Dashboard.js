@@ -68,7 +68,7 @@ export const Dashboard = () => {
                                 <div className='text-dark p-3'>
                                     <Form.Control
                                         type='text'
-                                        placeholder='Search borrowed...'
+                                        placeholder='Search books...'
                                         value={searchText}
                                         onChange={(e) => setSearchText(e.target.value)}
                                     />
@@ -81,7 +81,7 @@ export const Dashboard = () => {
                 <Container className='p-1 shadow-lg text-align-center' style={{
                     height: '45%', overflow: 'scroll'
                 }}>
-                    <Row><h3 className='text-secondary'>Burrowed Books</h3></Row>
+                    <Row><h3 className='text-secondary'>Books</h3></Row>
                     <Row className="justify-content-center mt-5 gap-3">
                         {
                             filteredBooks.map((item, i) => (
